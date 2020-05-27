@@ -112,7 +112,8 @@ if __name__ == "__main__":
 	parser.add_argument('-ow', '--overwrite', action='store_true', help='Create tiles even if they exist already')
 	args = parser.parse_args()
 
-	exception_names = ['ne_50m_admin_1_states_provinces_lines']
+	#exception_names = ['ne_50m_admin_1_states_provinces_lines']
+	exception_names = []
 	check_existence('cities15000.txt', args.in_dir)
 
 	level_info = parse_file(args.file, args.in_dir)
@@ -137,4 +138,4 @@ if __name__ == "__main__":
 		    print('tiny_planet_{}.1.osm;Level;-180.0;-86.0;180.0;86.0'.format(level), file=f)
 		    f.close()
 		spellcheck = [] if level < 6 else ['-s', os.path.join(args.in_dir, 'cities15000.txt', 'cities15000.txt')]
-		call(["marble-vectorosm-tilecreator", "-e", "o5m", "-z", str(level)] + spellcheck + ["-o", args.out_dir, target])
+		call(["./marble-vectorosm-tilecreator", "-e", "o5m", "-z", str(level)] + spellcheck + ["-o", args.out_dir, target])
